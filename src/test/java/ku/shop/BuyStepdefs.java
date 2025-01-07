@@ -28,6 +28,12 @@ public class BuyStepdefs {
         order.addItem(prod, quantity);
     }
 
+    @Then("a product {string} should have stock of {int}")
+    public void a_product_should_have_stock_of(String name, int stock) {
+        Product prod = catalog.getProduct(name);
+        assertEquals(stock, prod.getStock());
+    }
+
     @Then("total should be {float}")
     public void total_should_be(double total) {
         assertEquals(total, order.getTotal());

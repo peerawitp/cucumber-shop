@@ -11,23 +11,30 @@ Background:
 Scenario: Buy one product
     When I buy "Bread" with quantity 2
     Then total should be 41.00
+    Then a product "Bread" should have stock of 3
 
 Scenario: Buy multiple products
     When I buy "Bread" with quantity 2
     And I buy "Jam" with quantity 1
     Then total should be 121.00
+    Then a product "Bread" should have stock of 3
+    Then a product "Jam" should have stock of 9
 
 Scenario Outline: Buy one product
     When I buy <product> with quantity <quantity>
     Then total should be <total>
+    Then a product <product> should have stock of <stock_left>
     Examples:
-        | product  | quantity |  total  |
-        | "Bread"  |     1    |   20.50 |
-        | "Jam"    |     2    |  160.00 |
-        | "Butter" |     3    |  360.00 |
+        | product  | quantity |  total  | stock_left |
+        | "Bread"  |     1    |   20.50 |      4     |
+        | "Jam"    |     2    |  160.00 |      8     |
+        | "Butter" |     3    |  360.00 |      12    |
 
 Scenario: Buy multiple products
     When I buy "Bread" with quantity 2
     And I buy "Jam" with quantity 1
     And I buy "Butter" with quantity 1
     Then total should be 241.00
+    Then a product "Bread" should have stock of 3
+    Then a product "Jam" should have stock of 9
+    Then a product "Butter" should have stock of 14
